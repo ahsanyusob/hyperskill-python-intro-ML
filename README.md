@@ -1,4 +1,4 @@
-# Hyperskill - Introductory Machine Learning in Python
+## Hyperskill - Introductory Machine Learning in Python
 
 Table of contents
 ---
