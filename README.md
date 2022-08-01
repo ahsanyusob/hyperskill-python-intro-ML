@@ -27,6 +27,6 @@ Easy
 Notes
 ---
 
-> *My progress and solutions in hyperskill-python-core...*
+> *My progress and solutions in hyperskill-introductory-machine-learning-in-python...*
 >
 > *Practicing github readme...*
