@@ -11,53 +11,58 @@ class CustomLinearRegression:
 
     def fit(self, x, y):
         if self.fit_intercept:
-            X = np.array([[1.0, x[i]] for i in range(len(x))])  # create nx2-(system matrix)
+            X = np.array([[1.0, x['x'][i], x['w'][i], x['z'][i]] for i in range(len(x))])  # create nx4-(system matrix)
             Y = np.array([[y[i]] for i in range(len(y))])  # create nx1-(output matrix)
-            beta_0, beta_1 = np.linalg.inv(X.T @ X) @ X.T @ Y  # 2xn x nx2 x 2xn x nx1 = 2x1
-            self.intercept = beta_0[0]
-            self.coefficient = beta_1
+            beta = np.linalg.inv(X.T @ X) @ X.T @ Y  # 4xn x nx4 x 4xn x nx1 = 4x1
+            self.intercept = beta[0]
+            self.coefficient = beta[1:]
         else:
-            X = np.array([[x[i]] for i in range(len(x))])  # create nx1-(system matrix)
+            X = np.array([[x['x'][i], x['w'][i], x['z'][i]] for i in range(len(x))])  # create nx3-(system matrix)
             Y = np.array([[y[i]] for i in range(len(y))])  # create nx1-(output matrix)
-            beta = np.linalg.inv(X.T @ X) @ X.T @ Y  # 1xn x nx1 x 1xn x nx1 = 1x1
+            beta = np.linalg.inv(X.T @ X) @ X.T @ Y  # 3xn x nx3 x 3xn x nx1 = 3x1
             self.intercept = None
             self.coefficient = beta
+        return self.intercept, self.coefficient, beta
 
-        return self.intercept, self.coefficient
+    def predict(self, x, beta):
+        if self.fit_intercept:
+            X = np.array([[1.0, x['x'][i], x['w'][i], x['z'][i]] for i in range(len(x))])
+        else:
+            X = np.array([[x['x'][i], x['w'][i], x['z'][i]] for i in range(len(x))])
+        return X @ beta
 
 
 def main():
     # Data x and y
     x = [4.0, 4.5, 5, 5.5, 6.0, 6.5, 7.0]
+    w = [1, -3, 2, 5, 0, 3, 6]
+    z = [11, 15, 12, 9, 18, 13, 16]
     y = [33, 42, 45, 51, 53, 61, 62]
-    # x = [4.0, 7.0]
-    # y = [10.0, 16.0]
-    # x = [1.0, 2.0, 3.0, 4.0, 5.0]
-    # y = [0.0, 0.0, 0.0, 0.0, 0.0]
-    # x = [1.0, 4.5, 14.0, 3.8, 7.0, 19.4]
-    # y = [106.0, 150.7, 200.9, 115.8, 177, 156]
+
+    # Intercept exist?
+    intercept_flag = False
 
     # 1 - LOAD a pandas DataFrame containing x and y
-    data_frame = pd.DataFrame(zip(x, y), columns=['x', 'y'])
+    data_frame = pd.DataFrame(zip(x, w, z, y), columns=['x', 'w', 'z', 'y'])
 
     # 2 - INITIALIZE CustomLinearRegression class
-    linear_regression_model_1 = CustomLinearRegression()
+    linear_regression_model = CustomLinearRegression(fit_intercept=intercept_flag)
 
-    # 3 - Implement the fit() method
-    b_0_1, b_1_1 = linear_regression_model_1.fit(data_frame['x'], data_frame['y'])
-    beta_dict_1 = {'Intercept': b_0_1, 'Coefficient': b_1_1}
+    # 3.1 - Implement the fit() method
+    intercept, coefficients, beta_hat = linear_regression_model.fit(data_frame[['x', 'w', 'z']], data_frame['y'])
+    beta_dict = {'Intercept': intercept, 'Coefficient': coefficients}
 
-    # 4 - INITIALIZE CustomLinearRegression class with fit_intercept=True
-    linear_regression_model_2 = CustomLinearRegression(fit_intercept=False)
+    # 3.2 - Print a dictionary containing the intercept and coefficient values.
+    # print(beta_dict)
 
-    # 5 - Implement the fit() method
-    b_0_2, b_1_2 = linear_regression_model_2.fit(data_frame['x'], data_frame['y'])
-    beta_dict_2 = {'Intercept': b_0_2, 'Coefficient': b_1_2}
+    # 4 - Predict y for the other dataset xwz --> y_hat
+    y_predicted = linear_regression_model.predict(data_frame[['x', 'w', 'z']], beta_hat)
 
-    # 6 - Print a dictionary containing the intercept and coefficient values.
-    print(beta_dict_1)
-    # print(beta_dict_2)
+    # 5 - Print y_hat
+    print(y_predicted)
 
 
 if __name__ == '__main__':
     main()
+
+
