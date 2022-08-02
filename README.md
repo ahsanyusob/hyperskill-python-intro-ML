@@ -13,7 +13,7 @@ Table of contents
 Challenging
 ---
 
-> 1. [Linear Regression from Scratch](https://hyperskill.org/projects/195?track=28) --> [my solution - in progress](https://github.com/ahsanyusob/hyperskill-python-intro-ML/blob/master/challenging/Linear%20Regression%20From%20Scratch/regression.py)
+> 1. [Linear Regression from Scratch](https://hyperskill.org/projects/195?track=28) --> [my solution](https://github.com/ahsanyusob/hyperskill-python-intro-ML/blob/master/challenging/Linear%20Regression%20From%20Scratch/regression.py)
 
 Hard
 ---
