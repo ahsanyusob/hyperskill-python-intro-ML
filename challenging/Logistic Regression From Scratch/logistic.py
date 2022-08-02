@@ -17,16 +17,13 @@ class CustomLogisticRegression:
 
     def predict_proba(self, row, coef_):
         if self.fit_intercept:
-            coef_ = np.array([coef_]).T
-            row = row.T
             row = np.array([[1 for _ in range(len(row))],
-                   [row[i, 0] for i in range(len(row))],
-                   [row[i, 1] for i in range(len(row))]])
+                            [row[i, 0] for i in range(len(row))],
+                            [row[i, 1] for i in range(len(row))]])
             row = row.T
-            t = row @ coef_
         else:
-            coef_ = np.array([coef_[1:]]).T
-            t = np.dot(row, coef_)
+            coef_ = coef_[1:]
+        t = row @ coef_
         return self.sigmoid(t)
 
 
@@ -45,9 +42,7 @@ def standardize_z(x):
     :return: standardized feature data in numpy array (569 x 1 columns)
              --> i.e. 'std worst concave points', 'std worst perimeter'
     """
-    z = np.array([0.0 for _ in range(len(x))])
-    for i in range(len(x)):
-        z[i] = (x[i] - np.mean(x)) / np.std(x)
+    z = list(map(lambda x_: (x_ - np.mean(x)) / np.std(x), x))
     return z
 
 
@@ -69,7 +64,7 @@ def main():
       in the test set. (Don't need the training set in this stage) [MAIN] - done
     - 9 - Print these probabilities as a Python list [MAIN] - done
     """
-    # # 1 - Initialize custom logistic regression model
+    # 1 - Initialize custom logistic regression model
     custom_log_reg_model = CustomLogisticRegression(fit_intercept=True)
 
     # 5a - Load Breast Cancer Wisconsin dataset
@@ -86,11 +81,13 @@ def main():
 
     # 7 - split the data 80-20 with random_state=43
     X_train, X_test, y_train, y_test = train_test_split(X, Y, train_size=0.8, random_state=43)
-    row_ = np.array(X_test).T
-    row_ = row_[::, :10:1]
+    row_ = np.array(X_test)
+    row_ = row_[:10, ::]
 
     # 8 - calculate the probabilities of the first 10 rows in the test set (coef is given with bias)
-    coefficient = np.array([0.77001597, -2.12842434, -2.39305793])
+    coefficient = np.array([[0.77001597],
+                            [-2.12842434],
+                            [-2.39305793]])
     prob_list = custom_log_reg_model.predict_proba(row_, coefficient)
 
     # 9 - print the probabilities as a Python List
