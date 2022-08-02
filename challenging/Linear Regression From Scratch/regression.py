@@ -11,24 +11,24 @@ class CustomLinearRegression:
         self.fit_intercept = fit_intercept
         self.coefficient = np.array([])
         self.intercept = 0.0
+        self.beta = np.array([])
 
     def fit(self, x, y):
         if self.fit_intercept:
             x.insert(0, 'ones', np.ones(shape=(len(x), 1)), False)  # allow_duplicates = False
             X = np.array(x)  # create mxn-(system matrix) where m = number of columns and n = number of rows
             Y = np.array(y)  # create nx1-(output matrix)
-            beta = np.linalg.inv(X.T @ X) @ X.T @ Y  # nxm x mxn x nxm x mx1 = nx1
-            self.intercept = beta[0]
-            self.coefficient = beta.T
+            self.beta = np.linalg.inv(X.T @ X) @ X.T @ Y  # nxm x mxn x nxm x mx1 = nx1
+            self.intercept = self.beta[0]
+            self.coefficient = self.beta.T
         else:
             X = np.array(x)  # create mxn-(system matrix) where m = number of columns and n = number of rows
             Y = np.array(y)  # create nx1-(output matrix)
-            beta = np.linalg.inv(X.T @ X) @ X.T @ Y  # nxm x mxn x nxm x mx1 = nx1
+            self.beta = np.linalg.inv(X.T @ X) @ X.T @ Y  # nxm x mxn x nxm x mx1 = nx1
             self.intercept = 0.0
-            self.coefficient = beta.T
-        return beta
+            self.coefficient = self.beta.T
 
-    def predict(self, x, beta):
+    def predict(self, x):
         if self.fit_intercept:
             try:
                 x.insert(0, 'ones', np.ones(shape=(len(x), 1)), False)  # allow_duplicates = False
@@ -37,7 +37,7 @@ class CustomLinearRegression:
             X = np.array(x)  # create mxn-(system matrix) where m = number of columns and n = number of rows
         else:
             X = np.array(x)  # create mxn-(system matrix) where m = number of columns and n = number of rows
-        return X @ beta
+        return X @ self.beta
 
     def r2_score(self, y, y_hat):
         Y = np.array(y)  # create nx1-(output matrix)
@@ -81,15 +81,15 @@ def main():
     scikit_regression_model = LinearRegression(fit_intercept=intercept_flag)
 
     # 3 - Fit the data by passing the X DataFrame and y Series to LinearRegression and CustomLinearRegression
-    beta_hat = custom_regression_model.fit(dataframe_x, dataframe_y)
+    custom_regression_model.fit(dataframe_x, dataframe_y)
     scikit_regression_model.fit(dataframe_x, dataframe_y)
     intercept_crm = custom_regression_model.intercept[0]
-    coefficients_crm = custom_regression_model.coefficient[0][1:]
     intercept_srm = scikit_regression_model.intercept_[0]
+    coefficients_crm = custom_regression_model.coefficient[0][1:]
     coefficients_srm = scikit_regression_model.coef_[0][1:]
 
     # 4 - Predict y for the other dataset xwz and print the result (yhat)
-    y_predicted_crm = custom_regression_model.predict(dataframe_x, beta_hat)
+    y_predicted_crm = custom_regression_model.predict(dataframe_x)
     y_predicted_srm = scikit_regression_model.predict(dataframe_x)
 
     # 5 - Calculate RMSE & R2 metrics
