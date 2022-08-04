@@ -45,6 +45,30 @@ class CustomLogisticRegression:
                 # update all weights
                 self.coef_ = self.coef_ - self.l_rate * (y_hat - y_train[0, i]) * y_hat * (1 - y_hat) * row.T
 
+    def fit_log_loss(self, X_train, y_train):
+        n_row = np.shape(X_train)[0]
+        if self.fit_intercept:
+            try:
+                X_train.insert(0, 'ones', np.ones((n_row, 1)), False)  # allow_duplicates = False
+            except ValueError:
+                pass
+        n_coefficient = np.shape(X_train)[1]
+        self.coef_ = np.zeros((n_coefficient, 1))  # initialized weights and/or bias 1 x (n_coefficient)
+        X_train = np.array(X_train)  # (n_row) x (n_feature)
+        y_train = np.array([y_train])  # (n_row) x (n_target)
+
+        for iter_ in range(1, self.n_epoch + 1):
+            # if iter_ % 100 == 0:
+            #     print(f"\nIteration: {iter_}\n------------\n")
+            #     print(f"\nX_train: {X_train}\n")
+            #     print(f"\nCoefficients: {self.coef_}\n")
+            for i, row in enumerate(X_train):
+                row = np.array([row])  # 1 x (n_feature)
+                y_hat = self.predict_proba(row, self.coef_)  # 1x1
+                y_hat = np.array([y_hat])
+                # update all weights
+                self.coef_ = self.coef_ - self.l_rate * ((y_hat - y_train[0, i]) / n_row) * row.T
+
     def predict(self, X_test, cut_off=0.5):
         n_row = np.shape(X_test)[0]
         predictions = [0 for _ in range(n_row)]
@@ -82,18 +106,28 @@ def standardize_z(x):
 
 def main():
     """
+    #### Objective TASK 3:
+    - 1 - Implement fit_log_loss - done
+    - 2 - Load the dataset as in previous stage - done
+    - 3 - Standardize X - done
+    - 4 - Instantiate the CustomLogisticRegression like in previous stage - done
+    - 5 - Fit the model with the training set from Stage 1 using fit_log_loss - done
+    - 6 - Predict y_hat values - done
+    - 7 - Calculate the accuracy score - done
+    - 8 - Print coef_ array & accuracy as a Python dictionary - done
+
     #### Objective TASK 2:
 
-    - 1 - Implement the fit_mse method [CLASS]
-    - 2 - Implement the predict method [CLASS]
+    - 1 - Implement the fit_mse method - done
+    - 2 - Implement the predict method - done
     - 3 - Load the dataset. Independant variables: 'worst concave points', 'worst perimeter',
-          'worst radius' [MAIN] - done
-    - 4 - Standardize X [MAIN] - done
-    - 5 - Instantiate CustomLogisticRegression where fit_intercept=True, l_rate=0.01, n_epoch=1000) [MAIN] - done
-    - 6 - Fit the model with training set using fit_mse & Stochastic Gradient Descent algorithm
-    - 7 - Predict y_hat values
-    - 8 - Calculate accuracy score
-    - 9 - Print coef_ array and accuracy score as a Python dictionary
+          'worst radius'  done
+    - 4 - Standardize X - done
+    - 5 - Instantiate CustomLogisticRegression where fit_intercept=True, l_rate=0.01, n_epoch=1000) - done
+    - 6 - Fit the model with training set using fit_mse & Stochastic Gradient Descent algorithm - done
+    - 7 - Predict y_hat values - done
+    - 8 - Calculate accuracy score - done
+    - 9 - Print coef_ array and accuracy score as a Python dictionary - done
 
     #### Objectives TASK 1:
 
@@ -138,7 +172,7 @@ def main():
     X_train, X_test, y_train, y_test = train_test_split(X, Y, train_size=train_size, random_state=random_state)
 
     # 6 - Fit the model
-    custom_lr_model.fit_mse(X_train, y_train)
+    custom_lr_model.fit_log_loss(X_train, y_train)
 
     # # 7 - Predict yhat value
     y_predicted = custom_lr_model.predict(X_test, cut_off=cut_off)
