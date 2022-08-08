@@ -15,7 +15,7 @@ Challenging
 
 > 1. [Linear Regression from Scratch](https://hyperskill.org/projects/195?track=28) --> [my solution](https://github.com/ahsanyusob/hyperskill-python-intro-ML/blob/master/challenging/Linear%20Regression%20From%20Scratch/regression.py)
 > 2. [Logistic Regression From Scratch](https://hyperskill.org/projects/219) --> [my solution](https://github.com/ahsanyusob/hyperskill-python-intro-ML/blob/master/challenging/Logistic%20Regression%20From%20Scratch/logistic.py)
-> 3. [Classification of Handwritten Digits](https://hyperskill.org/projects/205?track=28) --> [my solution - in progress]
+> 3. [Classification of Handwritten Digits](https://hyperskill.org/projects/205?track=28) --> [my solution - in progress](https://github.com/ahsanyusob/hyperskill-python-intro-ML/blob/master/challenging/Classification%20of%20Handwritten%20Digits/analysis.py)
 
 Hard
 ---
