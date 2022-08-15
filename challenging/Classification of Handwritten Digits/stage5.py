@@ -22,14 +22,14 @@ def fit_predict_eval(dictionary, model, features_train, features_test, target_tr
 
 def main():
     """
-    Objective Stage 5:
-    - 1 Choose two best models from previous stage
-    - 2 Initialize GridSearchCV(estimator=..., param_grid=..., scoring='accuracy', n_jobs=-1)
+    #### Objective Stage 5:
+    - 1 - Choose two best models from previous stage
+    - 2 - Initialize GridSearchCV(estimator=..., param_grid=..., scoring='accuracy', n_jobs=-1)
       - For KNN: n_neighbors = [3, 4], weights = ['uniform', 'distance'], algorithm = ['auto', 'brute']
       - For RF: n_estimators = [300, 500], max_features = ['auto', 'log2'],
         class_weight = ['balanced', 'balanced_subsample']
-    - 3 Run the fit method of GridSearchCV to find the best estimator
-    - 4 Print the best sets of parameters for both algorithms and their accuracies.
+    - 3 - Run the fit method of GridSearchCV to find the best estimator
+    - 4 - Print the best sets of parameters for both algorithms and their accuracies.
     """
     # Initialization
     result_dict = dict()
