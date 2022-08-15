@@ -13,7 +13,7 @@ Table of contents
 Challenging
 ---
 
-> 1. [Linear Regression from Scratch](https://hyperskill.org/projects/195?track=28) --> [my solution](https://github.com/ahsanyusob/hyperskill-python-intro-ML/blob/master/challenging/Linear%20Regression%20From%20Scratch/regression.py)  
+> ### 1. [Linear Regression from Scratch](https://hyperskill.org/projects/195?track=28) --> [my solution](https://github.com/ahsanyusob/hyperskill-python-intro-ML/blob/master/challenging/Linear%20Regression%20From%20Scratch/regression.py)  
 > 
 > | No | Tasks |  
 > | --- | --- |  
@@ -25,7 +25,7 @@ Challenging
 > | 6 | Calculate RMSE and R2 metrics for both regression models |  
 > | 7 | Determine the intercept and coefficient of both regression models and calculate their differences |  
 >
-> 2. [Logistic Regression From Scratch](https://hyperskill.org/projects/219) --> [my solution](https://github.com/ahsanyusob/hyperskill-python-intro-ML/blob/master/challenging/Logistic%20Regression%20From%20Scratch/logistic.py)
+> ### 2. [Logistic Regression From Scratch](https://hyperskill.org/projects/219) --> [my solution](https://github.com/ahsanyusob/hyperskill-python-intro-ML/blob/master/challenging/Logistic%20Regression%20From%20Scratch/logistic.py)
 >
 > | No | Tasks |  
 > | --- | --- |  
@@ -42,7 +42,7 @@ Challenging
 > | 11 | Repeat step 6-10 for 2 more models: (1) CustomLogisticRegression using fit_log_loss method and (2) sklearn.linear_model.LogisticRegression with fit method |
 > | 12 | Compare the accuracy scores for all three models as well as errors from first and last epoch of the first 2 models  |
 > 
-> 3. [Classification of Handwritten Digits](https://hyperskill.org/projects/205?track=28) --> [my solution (Stage1-4)](https://github.com/ahsanyusob/hyperskill-python-intro-ML/blob/master/challenging/Classification%20of%20Handwritten%20Digits/stage4.py) --> [my solution (Stage 5)](https://github.com/ahsanyusob/hyperskill-python-intro-ML/blob/master/challenging/Classification%20of%20Handwritten%20Digits/stage5.py)
+> ### 3. [Classification of Handwritten Digits](https://hyperskill.org/projects/205?track=28) --> [my solution (Stage1-4)](https://github.com/ahsanyusob/hyperskill-python-intro-ML/blob/master/challenging/Classification%20of%20Handwritten%20Digits/stage4.py) --> [my solution (Stage 5)](https://github.com/ahsanyusob/hyperskill-python-intro-ML/blob/master/challenging/Classification%20of%20Handwritten%20Digits/stage5.py)
 >
 > #### Stage 1-4
 >
