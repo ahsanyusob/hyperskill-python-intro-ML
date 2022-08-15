@@ -27,18 +27,18 @@ def fit_predict_eval(dictionary, model, features_train, features_test, target_tr
 
 def main():
     """
-    Objective Stage 4:
-    - 1 Import sklearn.preprocessing.Normalizer - done
-    - 2 Initialize the normalizer, transform the features and save the output to features_norm
-    - 3 Repeat steps 2-4 from stage 3
-    - 4 Answer the following questions:
-      - Does the normalization have a positive impact in general?
-      - Which two models show the best scores? Round the result to the 3rd d.p.
+    #### Objective Stage 4:
+    - 1 - Import sklearn.preprocessing.Normalizer - done
+    - 2 - Initialize the normalizer, transform the features and save the output to features_norm
+    - 3 - Repeat steps 2-4 from stage 3
+    - 4 - Answer the following questions:
+        - Does the normalization have a positive impact in general?
+        - Which two models show the best scores? Round the result to the 3rd d.p.
 
-    Objective Stage 3:
-    - 1 Import sklearn implementations of the classifiers and the accuracy scorer for:
+    #### Objective Stage 3:
+    - 1 - Import sklearn implementations of the classifiers and the accuracy scorer for:
       (KNN, dt, logistic regression, Random Forest)
-    - 2 Implement separate function to make it easier for training a lot of models as follows:
+    - 2 - Implement separate function to make it easier for training a lot of models as follows:
       def fit_predict_eval(model, features_train, features_test, target_train, target_test):
             # fit the model
             # make prediction
@@ -52,25 +52,26 @@ def main():
                             target_train=y_train,
                             target_test=y_test
                           )
-    - 3 Initialize the models and set random_state=40 when needed
-    - 4 Fit the models
-    - 5 Make predictions and print the accuracies in the following order:
+    - 3 - Initialize the models and set random_state=40 when needed
+    - 4 - Fit the models
+    - 5 - Make predictions and print the accuracies in the following order:
       (KNN, dt, logistic regression, random forest)
-    - 6 Determine which model performs the best.
+    - 6 - Determine which model performs the best.
 
-    Objective Stage 2:
-    - 1 Import necessary tool from sklearn to split datasets
-    - 2 Use the first 6000 rows of the dataset.
+    #### Objective Stage 2:
+    - 1 - Import necessary tool from sklearn to split datasets
+    - 2 - Use the first 6000 rows of the dataset.
       Set the test_set_size = 0.3 & random_seed = 40
-    - 3 Print new data shapes and the proportions of samples per class in the training
+    - 3 - Print new data shapes and the proportions of samples per class in the training
       set
-    Objective Stage 1:
-    - 1 Import tensorflow and numpy
-    - 2 Load MNIST data from tensorflow.keras.datasets
-    - 3 Reshape the features array to the 2D array with n rows and m columns
+      
+    #### Objective Stage 1:
+    - 1 - Import tensorflow and numpy
+    - 2 - Load MNIST data from tensorflow.keras.datasets
+    - 3 - Reshape the features array to the 2D array with n rows and m columns
       (n: number of images in the dataset; m: number of pixels in each image)
       --> flatten the features and target arrays
-    - 4 Provide the unique target classes' names, the shape of the features array
+    - 4 - Provide the unique target classes' names, the shape of the features array
       and the shape of the target variable in following format: (n, m).
       Print the min and max values of the features array.
     """
